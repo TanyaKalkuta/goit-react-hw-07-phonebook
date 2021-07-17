@@ -9,6 +9,7 @@ import { fetchContacts } from './redux/phonebook/phonebook-operations';
 
 class App extends React.Component {
   static propTypes = {
+    onFetchContacts: PropTypes.func,
     contacts: PropTypes.array,
     filter: PropTypes.string,
   };
@@ -22,17 +23,11 @@ class App extends React.Component {
       <Container>
         <div>
           <h1>Phonebook</h1>
-          {/* <ContactForm onSubmit={this.formAddContact} /> */}
           <ContactForm />
 
           <h2>Contacts</h2>
-          {/* <Filter value={this.state.filter} onChange={this.changeFilter} /> */}
           <Filter />
 
-          {/* <ContactList
-            visibleContacts={this.getVisibleContacts}
-            onClick={this.deleteContact}
-          /> */}
           <ContactList />
         </div>
       </Container>
