@@ -16,13 +16,13 @@ import {
 
 const items = createReducer(contacts, {
   [fetchContactSuccess]: (_, { payload }) => payload,
-  [addContactSuccess]: (state, { payload }) => [...state, payload],
-  // [addContactSuccess]: (state, { payload }) => {
-  //   if (state.map(contact => contact.name).includes(payload.name)) {
-  //     return alert(`${payload.name} is already exist`);
-  //   }
-  //   return [...state, payload];
-  // },
+  // [addContactSuccess]: (state, { payload }) => [...state, payload],
+  [addContactSuccess]: (state, { payload }) => {
+    if (state.map(contact => contact.name).includes(payload.name)) {
+      return alert(`${payload.name} is already exist`);
+    }
+    return [...state, payload];
+  },
   [deleteContactSuccess]: (state, { payload }) =>
     state.filter(({ id }) => id !== payload),
 });

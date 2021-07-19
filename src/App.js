@@ -9,13 +9,13 @@ import { fetchContacts } from './redux/phonebook/phonebook-operations';
 
 class App extends React.Component {
   static propTypes = {
-    onFetchContacts: PropTypes.func,
+    // onFetchContacts: PropTypes.func,
     contacts: PropTypes.array,
     filter: PropTypes.string,
   };
 
   componentDidMount() {
-    this.props.onFetchContacts();
+    this.props.onfetchContacts();
   }
 
   render() {
@@ -36,7 +36,6 @@ class App extends React.Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-  onFetchContacts: () => dispatch(fetchContacts()),
+  onfetchContacts: () => dispatch(fetchContacts()),
 });
-
-export default connect(mapDispatchToProps)(App);
+export default connect(null, mapDispatchToProps)(App);
