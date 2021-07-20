@@ -12,15 +12,25 @@ import {
 } from './phonebook-action';
 
 axios.defaults.baseURL = 'http://localhost:4040';
-
-export const fetchContacts = () => dispatch => {
+// ---------------------------async-await-------------------------
+export const fetchContacts = () => async dispatch => {
   dispatch(fetchContactRequest());
-
-  axios
-    .get('/contacts')
-    .then(({ data }) => dispatch(fetchContactSuccess(data)))
-    .catch(error => dispatch(fetchContactError(error)));
+  try {
+    const { data } = await axios.get('/contacts');
+    dispatch(fetchContactSuccess(data));
+  } catch (error) {
+    dispatch(fetchContactError(error));
+  }
 };
+// -----------------then-cath----------------------------------
+// export const fetchContacts = () => dispatch => {
+//   dispatch(fetchContactRequest());
+
+//   axios
+//     .get('/contacts')
+//     .then(({ data }) => dispatch(fetchContactSuccess(data)))
+//     .catch(error => dispatch(fetchContactError(error)));
+// };
 
 export const addContact = (name, number) => dispatch => {
   const contact = {

@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 import { createReducer } from '@reduxjs/toolkit';
-import contacts from '../../json/contacts.json';
+// import contacts from '../../json/contacts.json';
 import {
   fetchContactRequest,
   fetchContactSuccess,
@@ -14,7 +14,7 @@ import {
   changeFilter,
 } from './phonebook-action';
 
-const items = createReducer(contacts, {
+const items = createReducer([], {
   [fetchContactSuccess]: (_, { payload }) => payload,
   // [addContactSuccess]: (state, { payload }) => [...state, payload],
   [addContactSuccess]: (state, { payload }) => {
