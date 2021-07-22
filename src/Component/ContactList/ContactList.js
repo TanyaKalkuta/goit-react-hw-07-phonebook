@@ -5,6 +5,10 @@ import { deleteContact } from '../../redux/phonebook/phonebook-operations';
 import ElementContactList from '../ElementContactList/ElementContactList';
 import styles from './ContactList.module.css';
 import { fetchContacts } from '../../redux/phonebook/phonebook-operations';
+import {
+  getLoading,
+  getVisibleContacts,
+} from '../../redux/phonebook/phonebook-selectors';
 
 class ContactList extends Component {
   static propTypes = {
@@ -42,23 +46,22 @@ class ContactList extends Component {
     );
   }
 }
+//-------------перенесли в   phonebook-selectors
+// const getVisibleContacts = (contacts, filter) => {
+//   const normalizedFilter = filter.toLowerCase();
 
-const getVisibleContacts = (contacts, filter) => {
-  const normalizedFilter = filter.toLowerCase();
-
-  return contacts.filter(contact =>
-    contact.name.toLowerCase().includes(normalizedFilter),
-  );
-};
-
-const mapStateToProps = ({ contacts: { items, filter, loading } }) => ({
-  contacts: getVisibleContacts(items, filter),
-  isLoadingContacts: loading,
+//   return contacts.filter(contact =>
+//     contact.name.toLowerCase().includes(normalizedFilter),
+//   );
+// };
+const mapStateToProps = state => ({
+  contacts: getVisibleContacts(state),
+  isLoadingContacts: getLoading(state),
+  //----------было:
+  // const mapStateToProps = ({ contacts: { items, filter, loading } }) => ({
+  //   contacts: getVisibleContacts(items, filter),
+  //   isLoadingContacts: loading,
 });
-// const mapStateToProps = state => ({
-// contacts: getVisibleContacts(state),
-//   isLoadingContacts: state.contacts.loading,
-// });
 
 const mapDispatchToProps = dispatch => ({
   onClick: id => dispatch(deleteContact(id)),
